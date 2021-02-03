@@ -16,9 +16,11 @@ const Race = ({ races, isFetching, error, getRaces }) => {
     return (
         <div>
             <h1>DnD 5e race reference:</h1>
+            {console.log('this is races:' + races)}
             {races && races.map(race => {
-                <h3 key={race.name}>{race.name}</h3>
+                return <h3 key={race.name}>{race.name}</h3>
             })}
+            {error && <h3>{error}</h3>}
             <button onClick={handleGetRaces}>See races</button>
         </div>
     );

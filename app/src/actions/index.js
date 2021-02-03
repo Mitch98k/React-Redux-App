@@ -10,7 +10,7 @@ export const getRaces = () => (dispatch) => {
     axios.get('http://www.dnd5eapi.co/api/races')
     .then(res => {
         console.log(res);
-        dispatch({ type: FETCH_RACES_SUCCESSFUL, payload: res.data })
+        dispatch({ type: FETCH_RACES_SUCCESSFUL, payload: res.data.results })
     })
     .catch(err => {
         console.error(err)

@@ -1,6 +1,5 @@
 import Race from './components/Race';
 
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
