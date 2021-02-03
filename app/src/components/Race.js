@@ -1,15 +1,35 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
-const Race = () => {
-    axios.get('http://www.dnd5eapi.co/api/races')
-    .then(res => console.log(res))
-    .catch(err => console.error(err))
+import { getRaces } from '../actions';
+
+const Race = ({ races, isFetching, error, getRaces }) => {
+    
+    const handleGetRaces = e => {
+        e.preventDefault();
+        getRaces();
+    }
+    if (isFetching) {
+        return <h2>Fetching races for you</h2>
+    }
+
     return (
         <div>
-            
+            <h1>DnD 5e race reference:</h1>
+            {races && races.map(race => {
+                <h3 key={race.name}>{race.name}</h3>
+            })}
+            <button onClick={handleGetRaces}>See races</button>
         </div>
-    )
-}
+    );
+};
 
-export default Race;
+const mapStateToProps = state => {
+    return {
+        races: state.races,
+        isFetching: state.isFetching,
+        error: state.error
+    };
+};
+
+export default connect(mapStateToProps, { getRaces })(Race);
